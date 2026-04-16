@@ -201,24 +201,31 @@ a {
   }
 
   .main-content {
-    padding: 1.25rem;
+    padding: 1.25rem 1rem;
+    overflow-x: hidden;
   }
 
   .app-topbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0.5rem 0.25rem;
-    margin-bottom: 1.5rem;
+    padding: 0.75rem 0.5rem;
+    margin-bottom: 1.25rem;
     gap: 1rem;
+    position: sticky;
+    top: 0;
+    z-index: 80;
+    background: transparent;
   }
 
   .mobile-menu-trigger {
     display: flex;
+    box-shadow: 0 4px 12px var(--glass-glow);
   }
 
   .language-menu {
     width: auto;
+    z-index: 85;
   }
 
   .language-icon-button {
@@ -229,6 +236,8 @@ a {
 
 @media (max-width: 640px) {
   .language-dropdown {
-    width: 100%;
+    width: calc(100vw - 2rem);
+    right: 0;
+    left: auto;
   }
 }
