@@ -18,8 +18,11 @@ const DashboardLayout = () => {
 
     return window.localStorage.getItem('dashboard-theme') || 'light';
   });
-  const [isLanguageMenuOpen, setIsLanguageMenuOpen] = useState(false);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const languageMenuRef = useRef(null);
+
+  const toggleSidebar = () => setIsSidebarOpen((prev) => !prev);
+  const closeSidebar = () => setIsSidebarOpen(false);
 
   useEffect(() => {
     document.documentElement.dataset.theme = theme;
@@ -56,9 +59,33 @@ const DashboardLayout = () => {
 
   return (
     <div className="app-container">
-      <Sidebar theme={theme} onToggleTheme={handleThemeToggle} />
+      <Sidebar
+        theme={theme}
+        onToggleTheme={handleThemeToggle}
+        isOpen={isSidebarOpen}
+        onClose={closeSidebar}
+      />
+
+      {/* Mobile Overlay */}
+      {isSidebarOpen && (
+        <div 
+          className="mobile-overlay active" 
+          onClick={closeSidebar} 
+          aria-hidden="true" 
+        />
+      )}
+
       <main className="main-content">
         <div className="app-topbar">
+          <button
+            type="button"
+            className="mobile-menu-trigger glass-panel"
+            onClick={toggleSidebar}
+            aria-label="Toggle Menu"
+          >
+            <Menu size={24} />
+          </button>
+
           <div className="language-menu" ref={languageMenuRef}>
             <button
               type="button"
