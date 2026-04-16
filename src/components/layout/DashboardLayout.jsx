@@ -1,0 +1,97 @@
+import { useEffect, useRef, useState } from 'react';
+import { Outlet } from 'react-router-dom';
+import { Check, Languages } from 'lucide-react';
+import Sidebar from './Sidebar';
+import { useLanguage } from '../../context/LanguageContext';
+
+const LANGUAGE_OPTIONS = [
+  { code: 'en', labelKey: 'common.languages.english' },
+  { code: 'am', labelKey: 'common.languages.amharic' },
+];
+
+const DashboardLayout = () => {
+  const { language, setLanguage, t } = useLanguage();
+  const [theme, setTheme] = useState(() => {
+    if (typeof window === 'undefined') {
+      return 'light';
+    }
+
+    return window.localStorage.getItem('dashboard-theme') || 'light';
+  });
+  const [isLanguageMenuOpen, setIsLanguageMenuOpen] = useState(false);
+  const languageMenuRef = useRef(null);
+
+  useEffect(() => {
+    document.documentElement.dataset.theme = theme;
+    document.documentElement.style.colorScheme = theme;
+    window.localStorage.setItem('dashboard-theme', theme);
+  }, [theme]);
+
+  useEffect(() => {
+    if (!isLanguageMenuOpen) {
+      return undefined;
+    }
+
+    const handlePointerDown = (event) => {
+      if (!languageMenuRef.current?.contains(event.target)) {
+        setIsLanguageMenuOpen(false);
+      }
+    };
+
+    window.addEventListener('mousedown', handlePointerDown);
+
+    return () => {
+      window.removeEventListener('mousedown', handlePointerDown);
+    };
+  }, [isLanguageMenuOpen]);
+
+  const handleThemeToggle = () => {
+    setTheme((currentTheme) => (currentTheme === 'light' ? 'dark' : 'light'));
+  };
+
+  const handleLanguageSelect = (nextLanguage) => {
+    setLanguage(nextLanguage);
+    setIsLanguageMenuOpen(false);
+  };
+
+  return (
+    <div className="app-container">
+      <Sidebar theme={theme} onToggleTheme={handleThemeToggle} />
+      <main className="main-content">
+        <div className="app-topbar">
+          <div className="language-menu" ref={languageMenuRef}>
+            <button
+              type="button"
+              className="language-icon-button glass-panel"
+              aria-label={t('topbar.languageMenuLabel')}
+              aria-expanded={isLanguageMenuOpen}
+              onClick={() => setIsLanguageMenuOpen((open) => !open)}
+            >
+              <Languages size={18} />
+              <span className="language-current">{language.toUpperCase()}</span>
+            </button>
+
+            {isLanguageMenuOpen && (
+              <div className="language-dropdown glass-panel" role="menu">
+                {LANGUAGE_OPTIONS.map((option) => (
+                  <button
+                    key={option.code}
+                    type="button"
+                    className={`language-menu-item ${language === option.code ? 'active' : ''}`}
+                    onClick={() => handleLanguageSelect(option.code)}
+                  >
+                    <span>{t(option.labelKey)}</span>
+                    {language === option.code && <Check size={16} />}
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
+        <Outlet />
+      </main>
+    </div>
+  );
+};
+
+export default DashboardLayout;

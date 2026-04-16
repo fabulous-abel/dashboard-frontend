@@ -1,0 +1,26 @@
+{
+  "sidebar": {
+    "dashboard": "ዳሽቦርድ",
+    "students": "ተማሪዎች",
+    "teachers": "መምህራን",
+    "schedule": "መርሐ-ግብር",
+    "attendance": "መገኘት",
+    "facilitators": "አስተባባሪዎች",
+    "administrator": "አስተዳዳሪ",
+    "brandTitle": "ሰንበት ትምህርት ቤት",
+    "brandSubtitle": "መማሪያ ፖርታል",
+    "adminUser": "አስተዳዳሪ ተጠቃሚ",
+    "signOut": "ውጣ"
+  },
+  "students": {
+    "searchPlaceholder": "{{target}}ን ፈልግ...",
+    "searchTarget": "ተማሪዎች"
+  },
+  "common": {
+    "appearance": {
+      "label": "ገጽታ",
+      "dark": "ጨለማ",
+      "bright": "ብሩህ"
+    }
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "sidebar": {
+    "dashboard": "Dashboard",
+    "students": "Students",
+    "teachers": "Teachers",
+    "schedule": "Schedule",
+    "attendance": "Attendance",
+    "facilitators": "Facilitators",
+    "administrator": "Administrator",
+    "brandTitle": "Sunday School",
+    "brandSubtitle": "Learning Portal",
+    "adminUser": "Admin User",
+    "signOut": "Sign Out"
+  },
+  "students": {
+    "searchPlaceholder": "Search {{target}}...",
+    "searchTarget": "students"
+  },
+  "common": {
+    "appearance": {
+      "label": "Appearance",
+      "dark": "Dark",
+      "bright": "Bright"
+    }
+  }
+}
