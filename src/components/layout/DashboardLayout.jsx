@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { Outlet } from 'react-router-dom';
-import { Check, Languages } from 'lucide-react';
+import { Check, Languages, Menu, X } from 'lucide-react';
 import Sidebar from './Sidebar';
 import { useLanguage } from '../../context/LanguageContext';
 
@@ -19,6 +19,7 @@ const DashboardLayout = () => {
     return window.localStorage.getItem('dashboard-theme') || 'light';
   });
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [isLanguageMenuOpen, setIsLanguageMenuOpen] = useState(false);
   const languageMenuRef = useRef(null);
 
   const toggleSidebar = () => setIsSidebarOpen((prev) => !prev);

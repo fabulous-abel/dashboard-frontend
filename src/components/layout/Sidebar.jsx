@@ -10,29 +10,39 @@ import {
   Moon,
   LogOut,
   Languages,
+  X,
 } from 'lucide-react';
 import brandLogo from '../../assets/logo.png';
 import { useLanguage } from '../../context/LanguageContext';
 import './Sidebar.css';
 
-const NavigationItem = ({ to, icon: Icon, label }) => (
+const NavigationItem = ({ to, icon: Icon, label, onClick }) => (
   <NavLink
     to={to}
     className={({ isActive }) => `sidebar-nav-item ${isActive ? 'active' : ''}`}
+    onClick={onClick}
   >
     <Icon size={20} className="nav-icon" />
     <span className="nav-label">{label}</span>
   </NavLink>
 );
 
-const Sidebar = ({ theme, onToggleTheme }) => {
+const Sidebar = ({ theme, onToggleTheme, isOpen, onClose }) => {
   const { t, language, toggleLanguage } = useLanguage();
   const isDarkTheme = theme === 'dark';
   const userRole = t('sidebar.administrator');
 
   return (
-    <aside className="sidebar glass-panel">
+    <aside className={`sidebar glass-panel ${isOpen ? 'open' : ''}`}>
       <div className="sidebar-header">
+        <button 
+          type="button" 
+          className="mobile-close-button" 
+          onClick={onClose}
+          aria-label="Close sidebar"
+        >
+          <X size={24} />
+        </button>
         <div className="logo-container">
           <div className="logo-mark">
             <img src={brandLogo} alt={t('sidebar.brandTitle')} className="brand-logo" />
@@ -45,12 +55,42 @@ const Sidebar = ({ theme, onToggleTheme }) => {
       </div>
 
       <nav className="sidebar-nav">
-        <NavigationItem to="/" icon={LayoutDashboard} label={t('sidebar.dashboard')} />
-        <NavigationItem to="/students" icon={Users} label={t('sidebar.students')} />
-        <NavigationItem to="/teachers" icon={GraduationCap} label={t('sidebar.teachers')} />
-        <NavigationItem to="/schedule" icon={Calendar} label={t('sidebar.schedule')} />
-        <NavigationItem to="/attendance" icon={CheckCircle} label={t('sidebar.attendance')} />
-        <NavigationItem to="/facilitators" icon={Settings} label={t('sidebar.facilitators')} />
+        <NavigationItem 
+          to="/" 
+          icon={LayoutDashboard} 
+          label={t('sidebar.dashboard')} 
+          onClick={onClose}
+        />
+        <NavigationItem 
+          to="/students" 
+          icon={Users} 
+          label={t('sidebar.students')} 
+          onClick={onClose}
+        />
+        <NavigationItem 
+          to="/teachers" 
+          icon={GraduationCap} 
+          label={t('sidebar.teachers')} 
+          onClick={onClose}
+        />
+        <NavigationItem 
+          to="/schedule" 
+          icon={Calendar} 
+          label={t('sidebar.schedule')} 
+          onClick={onClose}
+        />
+        <NavigationItem 
+          to="/attendance" 
+          icon={CheckCircle} 
+          label={t('sidebar.attendance')} 
+          onClick={onClose}
+        />
+        <NavigationItem 
+          to="/facilitators" 
+          icon={Settings} 
+          label={t('sidebar.facilitators')} 
+          onClick={onClose}
+        />
       </nav>
 
       <div className="sidebar-footer">
