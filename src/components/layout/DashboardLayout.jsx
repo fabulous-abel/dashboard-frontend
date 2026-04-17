@@ -18,18 +18,30 @@ const DashboardLayout = () => {
 
     return window.localStorage.getItem('dashboard-theme') || 'light';
   });
+  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(() => {
+    if (typeof window === 'undefined') {
+      return false;
+    }
+
+    return window.localStorage.getItem('dashboard-sidebar-collapsed') === 'true';
+  });
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isLanguageMenuOpen, setIsLanguageMenuOpen] = useState(false);
   const languageMenuRef = useRef(null);
 
   const toggleSidebar = () => setIsSidebarOpen((prev) => !prev);
   const closeSidebar = () => setIsSidebarOpen(false);
+  const toggleSidebarCollapse = () => setIsSidebarCollapsed((prev) => !prev);
 
   useEffect(() => {
     document.documentElement.dataset.theme = theme;
     document.documentElement.style.colorScheme = theme;
     window.localStorage.setItem('dashboard-theme', theme);
   }, [theme]);
+
+  useEffect(() => {
+    window.localStorage.setItem('dashboard-sidebar-collapsed', String(isSidebarCollapsed));
+  }, [isSidebarCollapsed]);
 
   useEffect(() => {
     if (!isLanguageMenuOpen) {
@@ -63,6 +75,8 @@ const DashboardLayout = () => {
       <Sidebar
         theme={theme}
         onToggleTheme={handleThemeToggle}
+        isCollapsed={isSidebarCollapsed}
+        onToggleCollapse={toggleSidebarCollapse}
         isOpen={isSidebarOpen}
         onClose={closeSidebar}
       />

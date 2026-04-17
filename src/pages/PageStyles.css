@@ -8,7 +8,7 @@
 }
 
 .page-header {
-  padding: 2rem;
+  padding: 1.5rem;
   border-radius: 1rem;
 }
 
@@ -25,17 +25,17 @@
 }
 
 .page-title {
-  font-size: 1.875rem;
+  font-size: 1.55rem;
   font-weight: 700;
   line-height: 1.1;
   color: var(--text-primary);
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.35rem;
 }
 
 .page-subtitle {
   color: var(--text-secondary);
-  font-size: 1rem;
-  line-height: 1.6;
+  font-size: 0.92rem;
+  line-height: 1.45;
   max-width: 60ch;
 }
 
@@ -90,7 +90,7 @@
 .text-red { color: var(--accent-secondary); }
 
 .content-panel {
-  padding: 2rem;
+  padding: 1.1rem 1.4rem 1.4rem;
   border-radius: 1rem;
   min-height: 400px;
 }
@@ -115,17 +115,17 @@ table {
 
 th {
   background: var(--table-head-bg);
-  padding: 1rem;
+  padding: 0.75rem 0.9rem;
   text-align: left;
-  font-size: 0.875rem;
+  font-size: 0.78rem;
   font-weight: 600;
   color: var(--text-secondary);
   border-bottom: 1px solid var(--glass-border);
 }
 
 td {
-  padding: 1rem;
-  font-size: 0.95rem;
+  padding: 0.8rem 0.9rem;
+  font-size: 0.86rem;
   border-bottom: 1px solid var(--glass-border);
   transition: background 0.2s;
 }
@@ -213,13 +213,13 @@ tr:hover td {
 
 .table-select {
   width: 100%;
-  min-width: 240px;
-  padding: 0.7rem 0.9rem;
+  min-width: 200px;
+  padding: 0.6rem 0.8rem;
   background: var(--surface-color);
   border: 1px solid var(--glass-border);
   border-radius: 0.75rem;
   color: var(--text-primary);
-  font-size: 0.92rem;
+  font-size: 0.84rem;
   outline: none;
   cursor: pointer;
   transition: all 0.2s ease;
@@ -271,10 +271,10 @@ tr:hover td {
 .grade-tab {
   border: 1px solid var(--glass-border);
   border-radius: 999px;
-  padding: 0.75rem 1rem;
+  padding: 0.55rem 0.8rem;
   background: var(--surface-color);
   color: var(--text-secondary);
-  font-size: 0.92rem;
+  font-size: 0.82rem;
   font-weight: 600;
   cursor: pointer;
   white-space: nowrap;
@@ -303,7 +303,7 @@ tr:hover td {
 
 .directory-meta {
   color: var(--text-secondary);
-  font-size: 0.94rem;
+  font-size: 0.82rem;
 }
 
 .inline-form-panel {
@@ -386,7 +386,7 @@ tr:hover td {
 }
 
 .mt-2 { margin-top: 0.5rem; }
-.mt-6 { margin-top: 1.5rem; }
+.mt-6 { margin-top: 0.75rem; }
 
 @media (max-width: 768px) {
   .page-container {
