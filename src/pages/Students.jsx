@@ -80,7 +80,9 @@ const Students = () => {
           ))}
         </div>
 
-        <StudentTable students={filteredStudents} />
+        <div className="mt-6">
+          <StudentTable students={filteredStudents} />
+        </div>
         {filteredStudents.length === 0 && (
           <div className="text-center p-8 text-secondary">{t('students.noResults')}</div>
         )}

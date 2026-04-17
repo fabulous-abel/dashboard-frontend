@@ -10,7 +10,6 @@ import {
   Sun,
   Moon,
   LogOut,
-  Languages,
   X,
 } from 'lucide-react';
 import brandLogo from '../../assets/logo.png';
