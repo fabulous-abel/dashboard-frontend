@@ -6,6 +6,7 @@ import {
   Calendar,
   CheckCircle,
   Settings,
+  Languages,
   Sun,
   Moon,
   LogOut,

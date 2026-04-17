@@ -33,6 +33,8 @@ const statusClassName = {
   onLeave: 'badge-inactive',
 };
 
+const roleOptions = ['registration', 'curriculum', 'family', 'logistics'];
+
 const createInitialForm = () => ({
   name: '',
   roleKey: 'registration',
@@ -41,76 +43,17 @@ const createInitialForm = () => ({
 });
 
 const Facilitators = () => {
-  const { t, language } = useLanguage();
+  const { t } = useLanguage();
   const [searchTerm, setSearchTerm] = useState('');
   const [facilitators, setFacilitators] = useState(FACILITATOR_SEED);
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [formValues, setFormValues] = useState(createInitialForm());
 
-  const copy =
-    language === 'am'
-      ? {
-          directoryTitle: 'የአስተባባሪዎች ዝርዝር',
-          summary: (count) => `${count} አስተባባሪዎች በዝርዝሩ ውስጥ አሉ።`,
-          searchPlaceholder: 'አስተባባሪ ወይም ኃላፊነት ፈልግ...',
-          formTitle: 'አዲስ አስተባባሪ ጨምር',
-          fields: {
-            name: 'ስም',
-            role: 'ኃላፊነት',
-            phone: 'ስልክ',
-            status: 'ሁኔታ',
-          },
-          roles: {
-            registration: 'ምዝገባ ኃላፊ',
-            curriculum: 'ትምህርት ክፍል አስተባባሪ',
-            family: 'የቤተሰብ ግንኙነት አስተባባሪ',
-            logistics: 'ሎጂስቲክስ አስተባባሪ',
-          },
-          table: {
-            name: 'ስም',
-            id: 'መለያ',
-            role: 'ኃላፊነት',
-            phone: 'ስልክ',
-            status: 'ሁኔታ',
-          },
-          save: 'አስቀምጥ',
-          cancel: 'ይቅር',
-          noResults: 'ከፍለጋዎ ጋር የሚዛመዱ አስተባባሪዎች አልተገኙም።',
-        }
-      : {
-          directoryTitle: 'Facilitators Directory',
-          summary: (count) => `${count} facilitator${count === 1 ? '' : 's'} available in the directory.`,
-          searchPlaceholder: 'Search facilitators or responsibilities...',
-          formTitle: 'Add New Facilitator',
-          fields: {
-            name: 'Name',
-            role: 'Responsibility',
-            phone: 'Phone',
-            status: 'Status',
-          },
-          roles: {
-            registration: 'Registration Lead',
-            curriculum: 'Curriculum Coordinator',
-            family: 'Family Liaison',
-            logistics: 'Logistics Coordinator',
-          },
-          table: {
-            name: 'Name',
-            id: 'ID',
-            role: 'Responsibility',
-            phone: 'Phone',
-            status: 'Status',
-          },
-          save: 'Save Facilitator',
-          cancel: 'Cancel',
-          noResults: 'No facilitators found matching your search.',
-        };
-
-  const roleOptions = ['registration', 'curriculum', 'family', 'logistics'];
+  const getRoleLabel = (roleKey) => t(`facilitators.roles.${roleKey}`);
 
   const filteredFacilitators = facilitators.filter((facilitator) => {
     const query = searchTerm.toLowerCase();
-    const roleLabel = copy.roles[facilitator.roleKey].toLowerCase();
+    const roleLabel = getRoleLabel(facilitator.roleKey).toLowerCase();
 
     return (
       facilitator.name.toLowerCase().includes(query) ||
@@ -160,22 +103,24 @@ const Facilitators = () => {
       <div className="content-panel glass-panel mt-6 animate-fade-in" style={{ animationDelay: '0.1s' }}>
         <div className="directory-header">
           <div>
-            <h2 className="text-xl font-semibold">{copy.directoryTitle}</h2>
-            <p className="directory-meta mt-2">{copy.summary(filteredFacilitators.length)}</p>
+            <h2 className="text-xl font-semibold">{t('facilitators.directoryTitle')}</h2>
+            <p className="directory-meta mt-2">
+              {t('facilitators.summary', { count: filteredFacilitators.length })}
+            </p>
           </div>
           <SearchBar
             value={searchTerm}
             onChange={setSearchTerm}
-            placeholder={copy.searchPlaceholder}
+            placeholder={t('facilitators.searchPlaceholder')}
           />
         </div>
 
         {isFormOpen && (
           <form className="inline-form-panel mt-6" onSubmit={handleSubmit}>
-            <h3 className="form-title">{copy.formTitle}</h3>
+            <h3 className="form-title">{t('facilitators.formTitle')}</h3>
             <div className="form-grid">
               <label className="form-field">
-                <span className="form-label">{copy.fields.name}</span>
+                <span className="form-label">{t('facilitators.fields.name')}</span>
                 <input
                   type="text"
                   className="form-input"
@@ -186,7 +131,7 @@ const Facilitators = () => {
               </label>
 
               <label className="form-field">
-                <span className="form-label">{copy.fields.role}</span>
+                <span className="form-label">{t('facilitators.fields.role')}</span>
                 <select
                   className="form-input"
                   value={formValues.roleKey}
@@ -194,14 +139,14 @@ const Facilitators = () => {
                 >
                   {roleOptions.map((roleKey) => (
                     <option key={roleKey} value={roleKey}>
-                      {copy.roles[roleKey]}
+                      {getRoleLabel(roleKey)}
                     </option>
                   ))}
                 </select>
               </label>
 
               <label className="form-field">
-                <span className="form-label">{copy.fields.phone}</span>
+                <span className="form-label">{t('facilitators.fields.phone')}</span>
                 <input
                   type="tel"
                   className="form-input"
@@ -212,7 +157,7 @@ const Facilitators = () => {
               </label>
 
               <label className="form-field">
-                <span className="form-label">{copy.fields.status}</span>
+                <span className="form-label">{t('facilitators.fields.status')}</span>
                 <select
                   className="form-input"
                   value={formValues.status}
@@ -226,10 +171,10 @@ const Facilitators = () => {
 
             <div className="form-actions">
               <button type="button" className="btn btn-secondary" onClick={handleFormCancel}>
-                {copy.cancel}
+                {t('facilitators.cancel')}
               </button>
               <button type="submit" className="btn btn-primary">
-                {copy.save}
+                {t('facilitators.save')}
               </button>
             </div>
           </form>
@@ -239,11 +184,11 @@ const Facilitators = () => {
           <table>
             <thead>
               <tr>
-                <th>{copy.table.name}</th>
-                <th>{copy.table.id}</th>
-                <th>{copy.table.role}</th>
-                <th>{copy.table.phone}</th>
-                <th>{copy.table.status}</th>
+                <th>{t('facilitators.table.name')}</th>
+                <th>{t('facilitators.table.id')}</th>
+                <th>{t('facilitators.table.role')}</th>
+                <th>{t('facilitators.table.phone')}</th>
+                <th>{t('facilitators.table.status')}</th>
               </tr>
             </thead>
             <tbody>
@@ -253,7 +198,7 @@ const Facilitators = () => {
                     <div className="font-semibold">{facilitator.name}</div>
                   </td>
                   <td className="text-secondary">{facilitator.id}</td>
-                  <td>{copy.roles[facilitator.roleKey]}</td>
+                  <td>{getRoleLabel(facilitator.roleKey)}</td>
                   <td className="text-secondary">{facilitator.phone}</td>
                   <td>
                     <span className={`badge ${statusClassName[facilitator.status]}`}>
@@ -267,7 +212,7 @@ const Facilitators = () => {
         </div>
 
         {filteredFacilitators.length === 0 && (
-          <div className="text-center p-8 text-secondary">{copy.noResults}</div>
+          <div className="text-center p-8 text-secondary">{t('facilitators.noResults')}</div>
         )}
       </div>
     </div>

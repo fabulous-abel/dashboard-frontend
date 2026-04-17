@@ -12,15 +12,147 @@
     "adminUser": "Admin User",
     "signOut": "Sign Out"
   },
+  "topbar": {
+    "languageMenuLabel": "Choose language"
+  },
+  "dashboard": {
+    "title": "Dashboard Overview",
+    "subtitle": "Track students, teachers, and weekly activity.",
+    "totalStudents": "Total Students",
+    "activeTeachers": "Active Teachers",
+    "classesToday": "Classes Today",
+    "recentActivity": "Recent Activity",
+    "recentActivityPlaceholder": "Recent updates and attendance activity will appear here."
+  },
   "students": {
+    "title": "Students",
+    "subtitle": "Browse enrollment, filter by grade, and review student records.",
+    "addButton": "Add Student",
+    "directoryTitle": "Student Directory",
+    "summary": "Showing {{count}} students in {{grade}}.",
     "searchPlaceholder": "Search {{target}}...",
-    "searchTarget": "students"
+    "searchTarget": "students",
+    "noResults": "No students match the current filters.",
+    "table": {
+      "studentName": "Student Name",
+      "id": "Student ID",
+      "grade": "Grade",
+      "parentContact": "Parent Contact",
+      "status": "Status",
+      "actions": "Actions"
+    }
+  },
+  "teachers": {
+    "title": "Teachers",
+    "subtitle": "Manage teacher assignments, service days, and contact details.",
+    "addButton": "Add Teacher",
+    "listTitle": "Teacher Directory",
+    "summary": "Showing {{count}} teachers.",
+    "searchPlaceholder": "Search teachers, grades, or service days...",
+    "noResults": "No teachers match your search.",
+    "table": {
+      "teacherName": "Teacher Name",
+      "id": "Teacher ID",
+      "assignedGrades": "Assigned Grades",
+      "phone": "Phone Number",
+      "serviceDay": "Service Day",
+      "status": "Status"
+    }
+  },
+  "schedule": {
+    "title": "Schedule",
+    "subtitle": "Organize weekly sessions, teachers, and class arrangements.",
+    "addButton": "Add Session",
+    "listTitle": "Weekly Schedule",
+    "summary": "Showing {{count}} sessions for {{session}}.",
+    "empty": "No schedule entries are available for {{session}}.",
+    "table": {
+      "time": "Time",
+      "teacher": "Teacher",
+      "arrangement": "Arrangement",
+      "actions": "Actions"
+    },
+    "arrangements": {
+      "opening": "Opening Gathering",
+      "classroom": "Classroom Lesson",
+      "discussion": "Group Discussion",
+      "project": "Project Activity",
+      "scripture": "Scripture Study",
+      "mentoring": "Mentoring Session"
+    }
+  },
+  "attendance": {
+    "title": "Attendance",
+    "subtitle": "Track weekly attendance and follow-up needs.",
+    "placeholder": "Attendance records will appear here once the data source is connected."
+  },
+  "facilitators": {
+    "title": "Facilitators",
+    "subtitle": "Coordinate facilitator roles, availability, and contact details.",
+    "addButton": "Add Facilitator",
+    "directoryTitle": "Facilitator Directory",
+    "summary": "Showing {{count}} facilitators.",
+    "searchPlaceholder": "Search facilitators or responsibilities...",
+    "formTitle": "Add New Facilitator",
+    "fields": {
+      "name": "Name",
+      "role": "Responsibility",
+      "phone": "Phone Number",
+      "status": "Status"
+    },
+    "roles": {
+      "registration": "Registration Lead",
+      "curriculum": "Curriculum Coordinator",
+      "family": "Family Liaison",
+      "logistics": "Logistics Coordinator"
+    },
+    "table": {
+      "name": "Name",
+      "id": "Facilitator ID",
+      "role": "Responsibility",
+      "phone": "Phone Number",
+      "status": "Status"
+    },
+    "save": "Save Facilitator",
+    "cancel": "Cancel",
+    "noResults": "No facilitators match your search."
   },
   "common": {
     "appearance": {
       "label": "Appearance",
       "dark": "Dark",
       "bright": "Bright"
+    },
+    "languages": {
+      "english": "English",
+      "amharic": "አማርኛ"
+    },
+    "grades": {
+      "all": "All Grades",
+      "grade": "Grade {{number}}",
+      "range": "Grades {{start}}-{{end}}"
+    },
+    "actions": {
+      "viewDetails": "View Details",
+      "edit": "Edit",
+      "delete": "Delete"
+    },
+    "status": {
+      "active": "Active",
+      "inactive": "Inactive",
+      "assistant": "Assistant",
+      "onLeave": "On Leave"
+    },
+    "serviceDays": {
+      "sundayAm": "Sunday Morning",
+      "sundayPm": "Sunday Afternoon",
+      "saturdayPm": "Saturday Afternoon"
+    },
+    "sessions": {
+      "saturday": "Saturday",
+      "sunday": "Sunday",
+      "extension": "Extension Class",
+      "virtual": "Virtual Session"
     }
   }
 }

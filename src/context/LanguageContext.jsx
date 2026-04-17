@@ -6,6 +6,29 @@ const LanguageContext = createContext();
 
 const translations = { en, am };
 
+const getNestedTranslation = (dictionary, key) => {
+  if (!dictionary) {
+    return undefined;
+  }
+
+  return key.split('.').reduce((currentValue, nextKey) => {
+    if (currentValue === undefined || currentValue === null) {
+      return undefined;
+    }
+
+    return currentValue[nextKey];
+  }, dictionary);
+};
+
+const humanizeTranslationKey = (key) => {
+  const fallbackLabel = key.split('.').pop() || key;
+
+  return fallbackLabel
+    .replace(/([a-z])([A-Z])/g, '$1 $2')
+    .replace(/[_-]+/g, ' ')
+    .replace(/\b\w/g, (character) => character.toUpperCase());
+};
+
 export const LanguageProvider = ({ children }) => {
   const [language, setLanguage] = useState(localStorage.getItem('lang') || 'en');
 
@@ -19,12 +42,14 @@ export const LanguageProvider = ({ children }) => {
   };
 
   const t = (key, params = {}) => {
-    const keys = key.split('.');
-    let value = translations[language];
+    let value = getNestedTranslation(translations[language], key);
 
-    for (const k of keys) {
-      if (!value || !value[k]) return key;
-      value = value[k];
+    if (value === undefined && language !== 'en') {
+      value = getNestedTranslation(translations.en, key);
+    }
+
+    if (value === undefined) {
+      value = humanizeTranslationKey(key);
     }
 
     if (typeof value === 'string') {
