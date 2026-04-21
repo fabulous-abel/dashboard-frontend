@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import PageHeader from '../components/ui/PageHeader';
-import SearchBar from '../components/ui/SearchBar';
-import StudentTable from '../components/students/StudentTable';
-import { useLanguage } from '../context/LanguageContext';
-import './PageStyles.css';
+import PageHeader from '../../components/ui/PageHeader';
+import SearchBar from '../../components/ui/SearchBar';
+import StudentTable from '../../components/students/StudentTable';
+import { useLanguage } from '../../context/LanguageContext';
+import '../PageStyles.css';
 
 const MOCK_STUDENTS = [
   { name: 'Abel Mekonnen', id: 'SS-001', grade: 1, contact: '+251 911 223 344', status: 'active' },

@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Edit2, Plus, Trash2 } from 'lucide-react';
-import PageHeader from '../components/ui/PageHeader';
-import { useLanguage } from '../context/LanguageContext';
-import './PageStyles.css';
+import PageHeader from '../../components/ui/PageHeader';
+import { useLanguage } from '../../context/LanguageContext';
+import '../PageStyles.css';
 
 const SCHEDULE_TABS = ['saturday', 'sunday', 'extension', 'virtual'];
 

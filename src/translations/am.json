@@ -1,4 +1,22 @@
 {
+  "roleSelector": {
+    "title": "ዳሽቦርድ ፖርታል",
+    "subtitle": "ለመጀመር ዳሽቦርድ ይምረጡ። በማንኛውም ጊዜ ዳሽቦርዶችን መቀያየር ይችላሉ።",
+    "roles": {
+      "superadmin": {
+        "name": "ሱፐር አድሚን",
+        "description": "ሙሉ የሲስተም ተደራሽነት — ተጠቃሚዎችን፣ ክፍሎችን፣ ቅንብሮችን ያስተዳድሩ።"
+      },
+      "hr": {
+        "name": "የሰው ሀብት አስተዳደር",
+        "description": "ሰራተኞችን፣ የፈቃድ ጥያቄዎችን፣ ክፍያ እና ቅጥር ያስተዳድሩ።"
+      },
+      "learning": {
+        "name": "መማሪያ",
+        "description": "የተማሪዎች መማሪያ ክፍል — መምህራን፣ መርሐ-ግብር እና መገኘት።"
+      }
+    }
+  },
   "sidebar": {
     "dashboard": "ዳሽቦርድ",
     "students": "ተማሪዎች",
@@ -10,7 +28,27 @@
     "brandTitle": "ሰንበት ትምህርት ቤት",
     "brandSubtitle": "መማሪያ ፖርታል",
     "adminUser": "አስተዳዳሪ ተጠቃሚ",
-    "signOut": "ውጣ"
+    "signOut": "ውጣ",
+    "switchDashboard": "ዳሽቦርድ ቀይር"
+  },
+  "superadmin": {
+    "nav": {
+      "dashboard": "ዳሽቦርድ",
+      "users": "ተጠቃሚ አስተዳደር",
+      "departments": "ክፍሎች",
+      "settings": "የሲስተም ቅንብሮች",
+      "auditLogs": "የኦዲት ምዝግብ"
+    }
+  },
+  "hr": {
+    "nav": {
+      "dashboard": "ዳሽቦርድ",
+      "employees": "ሰራተኞች",
+      "departments": "ክፍሎች",
+      "leave": "የፈቃድ አስተዳደር",
+      "payroll": "ክፍያ",
+      "recruitment": "ቅጥር"
+    }
   },
   "students": {
     "searchPlaceholder": "{{target}}ን ፈልግ...",
@@ -21,6 +59,10 @@
       "label": "ገጽታ",
       "dark": "ጨለማ",
       "bright": "ብሩህ"
+    },
+    "languages": {
+      "english": "English",
+      "amharic": "አማርኛ"
     }
   }
 }

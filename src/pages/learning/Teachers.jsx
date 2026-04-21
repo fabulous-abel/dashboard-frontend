@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import PageHeader from '../components/ui/PageHeader';
-import SearchBar from '../components/ui/SearchBar';
-import { useLanguage } from '../context/LanguageContext';
-import './PageStyles.css';
+import PageHeader from '../../components/ui/PageHeader';
+import SearchBar from '../../components/ui/SearchBar';
+import { useLanguage } from '../../context/LanguageContext';
+import '../PageStyles.css';
 
 const MOCK_TEACHERS = [
   { id: 'TC-001', name: 'Selamawit Bekele', grades: [1, 2], phone: '+251 911 456 780', day: 'sundayAm', status: 'active' },

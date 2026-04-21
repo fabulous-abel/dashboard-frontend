@@ -1,7 +1,7 @@
 import React from 'react';
-import PageHeader from '../components/ui/PageHeader';
-import { useLanguage } from '../context/LanguageContext';
-import './PageStyles.css';
+import PageHeader from '../../components/ui/PageHeader';
+import { useLanguage } from '../../context/LanguageContext';
+import '../PageStyles.css';
 
 const Attendance = () => {
   const { t } = useLanguage();

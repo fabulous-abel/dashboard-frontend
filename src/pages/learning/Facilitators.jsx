@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import PageHeader from '../components/ui/PageHeader';
-import SearchBar from '../components/ui/SearchBar';
-import { useLanguage } from '../context/LanguageContext';
-import './PageStyles.css';
+import PageHeader from '../../components/ui/PageHeader';
+import SearchBar from '../../components/ui/SearchBar';
+import { useLanguage } from '../../context/LanguageContext';
+import '../PageStyles.css';
 
 const FACILITATOR_SEED = [
   {

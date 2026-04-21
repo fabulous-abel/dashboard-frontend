@@ -1,5 +1,5 @@
-import PageHeader from '../components/ui/PageHeader';
-import { useLanguage } from '../context/LanguageContext';
+import PageHeader from '../../components/ui/PageHeader';
+import { useLanguage } from '../../context/LanguageContext';
 
 const Dashboard = () => {
   const { t } = useLanguage();

@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { Outlet } from 'react-router-dom';
-import { Check, Languages, Menu, X } from 'lucide-react';
+import { Check, Languages, Menu } from 'lucide-react';
 import Sidebar from './Sidebar';
 import { useLanguage } from '../../context/LanguageContext';
 
@@ -9,7 +9,7 @@ const LANGUAGE_OPTIONS = [
   { code: 'am', labelKey: 'common.languages.amharic' },
 ];
 
-const DashboardLayout = () => {
+const DashboardLayout = ({ navItems, basePath, brandTitle, brandSubtitle }) => {
   const { language, setLanguage, t } = useLanguage();
   const [theme, setTheme] = useState(() => {
     if (typeof window === 'undefined') {
@@ -79,6 +79,10 @@ const DashboardLayout = () => {
         onToggleCollapse={toggleSidebarCollapse}
         isOpen={isSidebarOpen}
         onClose={closeSidebar}
+        navItems={navItems}
+        basePath={basePath}
+        brandTitle={brandTitle}
+        brandSubtitle={brandSubtitle}
       />
 
       {/* Mobile Overlay */}

@@ -1,4 +1,22 @@
 {
+  "roleSelector": {
+    "title": "Dashboard Portal",
+    "subtitle": "Select a dashboard to get started. You can switch between dashboards at any time.",
+    "roles": {
+      "superadmin": {
+        "name": "Super Admin",
+        "description": "Full system access — manage users, departments, settings, and audit logs."
+      },
+      "hr": {
+        "name": "HR Management",
+        "description": "Manage employees, leave requests, payroll, and recruitment."
+      },
+      "learning": {
+        "name": "Learning",
+        "description": "Student learning department — teachers, schedules, and attendance."
+      }
+    }
+  },
   "sidebar": {
     "dashboard": "Dashboard",
     "students": "Students",
@@ -10,7 +28,8 @@
     "brandTitle": "Sunday School",
     "brandSubtitle": "Learning Portal",
     "adminUser": "Admin User",
-    "signOut": "Sign Out"
+    "signOut": "Sign Out",
+    "switchDashboard": "Switch Dashboard"
   },
   "topbar": {
     "languageMenuLabel": "Choose language"
@@ -116,6 +135,193 @@
     "save": "Save Facilitator",
     "cancel": "Cancel",
     "noResults": "No facilitators match your search."
+  },
+  "superadmin": {
+    "nav": {
+      "dashboard": "Dashboard",
+      "users": "User Management",
+      "departments": "Departments",
+      "settings": "System Settings",
+      "auditLogs": "Audit Logs"
+    },
+    "dashboard": {
+      "title": "System Overview",
+      "subtitle": "Monitor system health, user activity, and overall platform metrics.",
+      "totalUsers": "Total Users",
+      "activeDepartments": "Active Departments",
+      "systemHealth": "System Health",
+      "pendingApprovals": "Pending Approvals",
+      "recentActivity": "Recent System Activity",
+      "table": {
+        "action": "Action",
+        "user": "User",
+        "time": "Time"
+      }
+    },
+    "users": {
+      "title": "User Management",
+      "subtitle": "Manage all user accounts, roles, and access permissions.",
+      "directoryTitle": "User Directory",
+      "summary": "Showing {{count}} users.",
+      "searchPlaceholder": "Search users, emails, or roles...",
+      "noResults": "No users match your search.",
+      "table": {
+        "name": "Name",
+        "id": "User ID",
+        "email": "Email",
+        "role": "Role",
+        "status": "Status",
+        "actions": "Actions"
+      }
+    },
+    "departments": {
+      "title": "Departments",
+      "subtitle": "Overview of all departments, their heads, and member counts.",
+      "headLabel": "Head"
+    },
+    "settings": {
+      "title": "System Settings",
+      "subtitle": "Configure global system parameters and security policies.",
+      "sections": {
+        "general": {
+          "title": "General Settings",
+          "siteName": "Site Name",
+          "timezone": "Timezone",
+          "language": "Default Language"
+        },
+        "security": {
+          "title": "Security",
+          "twoFactor": "Two-Factor Authentication",
+          "sessionTimeout": "Session Timeout (minutes)",
+          "passwordPolicy": "Password Policy"
+        },
+        "notifications": {
+          "title": "Notifications",
+          "emailNotifs": "Email Notifications",
+          "smsNotifs": "SMS Notifications",
+          "systemAlerts": "System Alerts"
+        }
+      }
+    },
+    "auditLogs": {
+      "title": "Audit Logs",
+      "subtitle": "Track all system actions, user logins, and configuration changes.",
+      "listTitle": "Activity Log",
+      "searchPlaceholder": "Search actions, users, or IPs...",
+      "noResults": "No logs match your search.",
+      "table": {
+        "id": "Log ID",
+        "action": "Action",
+        "user": "User",
+        "ip": "IP Address",
+        "timestamp": "Timestamp",
+        "severity": "Severity"
+      }
+    }
+  },
+  "hr": {
+    "nav": {
+      "dashboard": "Dashboard",
+      "employees": "Employees",
+      "departments": "Departments",
+      "leave": "Leave Management",
+      "payroll": "Payroll",
+      "recruitment": "Recruitment"
+    },
+    "dashboard": {
+      "title": "HR Overview",
+      "subtitle": "Employee metrics, leave status, and recruitment pipeline at a glance.",
+      "totalEmployees": "Total Employees",
+      "onLeave": "On Leave",
+      "openPositions": "Open Positions",
+      "payrollDue": "Payroll Due",
+      "recentHires": "Recent Hires",
+      "table": {
+        "name": "Name",
+        "department": "Department",
+        "date": "Start Date"
+      }
+    },
+    "employees": {
+      "title": "Employees",
+      "subtitle": "Browse all employees, filter by department, and manage records.",
+      "directoryTitle": "Employee Directory",
+      "summary": "Showing {{count}} employees.",
+      "searchPlaceholder": "Search employees, departments, or positions...",
+      "noResults": "No employees match your search.",
+      "table": {
+        "name": "Name",
+        "id": "Employee ID",
+        "department": "Department",
+        "position": "Position",
+        "phone": "Phone",
+        "status": "Status",
+        "actions": "Actions"
+      }
+    },
+    "departments": {
+      "title": "Departments",
+      "subtitle": "Manage department structure, headcount, and budgets.",
+      "listTitle": "Department Overview",
+      "table": {
+        "name": "Department",
+        "head": "Department Head",
+        "headcount": "Headcount",
+        "budget": "Monthly Budget"
+      }
+    },
+    "leave": {
+      "title": "Leave Management",
+      "subtitle": "Review and approve leave requests from employees.",
+      "listTitle": "Leave Requests",
+      "noResults": "No leave requests match the filter.",
+      "filters": {
+        "all": "All",
+        "pending": "Pending",
+        "approved": "Approved",
+        "rejected": "Rejected"
+      },
+      "table": {
+        "employee": "Employee",
+        "type": "Leave Type",
+        "from": "From",
+        "to": "To",
+        "days": "Days",
+        "status": "Status",
+        "actions": "Actions"
+      }
+    },
+    "payroll": {
+      "title": "Payroll",
+      "subtitle": "Monthly payroll summary and employee compensation breakdown.",
+      "totalGross": "Total Gross",
+      "totalDeductions": "Total Deductions",
+      "totalNet": "Total Net Pay",
+      "listTitle": "Payroll Breakdown",
+      "table": {
+        "employee": "Employee",
+        "department": "Department",
+        "baseSalary": "Base Salary",
+        "allowances": "Allowances",
+        "deductions": "Deductions",
+        "netPay": "Net Pay"
+      }
+    },
+    "recruitment": {
+      "title": "Recruitment",
+      "subtitle": "Track open positions, applicants, and hiring progress.",
+      "listTitle": "Open Positions",
+      "summary": "Showing {{count}} positions.",
+      "searchPlaceholder": "Search positions or departments...",
+      "noResults": "No positions match your search.",
+      "table": {
+        "title": "Position",
+        "department": "Department",
+        "applicants": "Applicants",
+        "posted": "Posted",
+        "status": "Status"
+      }
+    }
   },
   "common": {
     "appearance": {

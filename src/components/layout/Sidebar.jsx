@@ -1,26 +1,23 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import {
-  LayoutDashboard,
-  Users,
-  GraduationCap,
-  Calendar,
-  CheckCircle,
-  Settings,
-  Languages,
   Sun,
   Moon,
   LogOut,
   PanelLeftClose,
   PanelLeftOpen,
   X,
+  ArrowLeftRight,
+  Languages,
 } from 'lucide-react';
 import brandLogo from '../../assets/logo.png';
 import { useLanguage } from '../../context/LanguageContext';
+import { useAuth } from '../../context/AuthContext';
 import './Sidebar.css';
 
-const NavigationItem = ({ to, icon: Icon, label, onClick, isCollapsed }) => (
+const NavigationItem = ({ to, icon: Icon, label, onClick, isCollapsed, end }) => (
   <NavLink
     to={to}
+    end={end}
     className={({ isActive }) => `sidebar-nav-item ${isActive ? 'active' : ''}`}
     onClick={onClick}
     aria-label={label}
@@ -38,13 +35,27 @@ const Sidebar = ({
   onToggleCollapse,
   isOpen,
   onClose,
+  navItems,
+  basePath,
+  brandTitle,
+  brandSubtitle,
 }) => {
   const { t, language, toggleLanguage } = useLanguage();
+  const { logout, roleMeta } = useAuth();
+  const navigate = useNavigate();
   const isDarkTheme = theme === 'dark';
-  const userRole = t('sidebar.administrator');
   const collapseLabel = isCollapsed ? 'Expand sidebar' : 'Collapse sidebar';
   const nextLanguageLabel =
     language === 'en' ? t('common.languages.amharic') : t('common.languages.english');
+
+  const displayTitle = brandTitle?.startsWith('sidebar.') ? t(brandTitle) : (brandTitle || t('sidebar.brandTitle'));
+  const displaySubtitle = brandSubtitle?.startsWith('sidebar.') ? t(brandSubtitle) : (brandSubtitle || t('sidebar.brandSubtitle'));
+  const avatarLetter = roleMeta?.avatarLetter || 'A';
+
+  const handleSwitchDashboard = () => {
+    logout();
+    navigate('/');
+  };
 
   return (
     <aside className={`sidebar glass-panel ${isOpen ? 'open' : ''} ${isCollapsed ? 'collapsed' : ''}`}>
@@ -62,66 +73,35 @@ const Sidebar = ({
 
         <div className="logo-container">
           <div className="logo-mark">
-            <img src={brandLogo} alt={t('sidebar.brandTitle')} className="brand-logo" />
+            <img src={brandLogo} alt={displayTitle} className="brand-logo" />
           </div>
           <div className="logo-copy">
-            <h1 className="logo-text">{t('sidebar.brandTitle')}</h1>
-            <p className="logo-subtitle">{t('sidebar.brandSubtitle')}</p>
+            <h1 className="logo-text">{displayTitle}</h1>
+            <p className="logo-subtitle">{displaySubtitle}</p>
           </div>
         </div>
       </div>
 
       <nav className="sidebar-nav">
-        <NavigationItem
-          to="/"
-          icon={LayoutDashboard}
-          label={t('sidebar.dashboard')}
-          onClick={onClose}
-          isCollapsed={isCollapsed}
-        />
-        <NavigationItem
-          to="/students"
-          icon={Users}
-          label={t('sidebar.students')}
-          onClick={onClose}
-          isCollapsed={isCollapsed}
-        />
-        <NavigationItem
-          to="/teachers"
-          icon={GraduationCap}
-          label={t('sidebar.teachers')}
-          onClick={onClose}
-          isCollapsed={isCollapsed}
-        />
-        <NavigationItem
-          to="/schedule"
-          icon={Calendar}
-          label={t('sidebar.schedule')}
-          onClick={onClose}
-          isCollapsed={isCollapsed}
-        />
-        <NavigationItem
-          to="/attendance"
-          icon={CheckCircle}
-          label={t('sidebar.attendance')}
-          onClick={onClose}
-          isCollapsed={isCollapsed}
-        />
-        <NavigationItem
-          to="/facilitators"
-          icon={Settings}
-          label={t('sidebar.facilitators')}
-          onClick={onClose}
-          isCollapsed={isCollapsed}
-        />
+        {navItems.map((item) => (
+          <NavigationItem
+            key={item.path}
+            to={`${basePath}/${item.path}`}
+            icon={item.icon}
+            label={t(item.labelKey)}
+            onClick={onClose}
+            isCollapsed={isCollapsed}
+            end={item.end}
+          />
+        ))}
       </nav>
 
       <div className="sidebar-footer">
         <div className="user-profile" title={isCollapsed ? t('sidebar.adminUser') : undefined}>
-          <div className="avatar">A</div>
+          <div className="avatar">{avatarLetter}</div>
           <div className="user-info">
             <span className="user-name">{t('sidebar.adminUser')}</span>
-            {userRole ? <span className="user-role">{userRole}</span> : null}
+            <span className="user-role">{roleMeta?.label || t('sidebar.administrator')}</span>
           </div>
         </div>
 
@@ -155,6 +135,17 @@ const Sidebar = ({
           >
             <Languages size={18} />
             <span className="sidebar-action-text">{nextLanguageLabel}</span>
+          </button>
+
+          <button
+            type="button"
+            className="switch-dashboard-button"
+            onClick={handleSwitchDashboard}
+            aria-label={t('sidebar.switchDashboard')}
+            title={isCollapsed ? t('sidebar.switchDashboard') : undefined}
+          >
+            <ArrowLeftRight size={18} />
+            <span className="sidebar-action-text">{t('sidebar.switchDashboard')}</span>
           </button>
 
           <button
