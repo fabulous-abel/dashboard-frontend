@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { Outlet } from 'react-router-dom';
-import { Check, Languages, Menu } from 'lucide-react';
+import { Check, Languages, Menu, Moon, Sun } from 'lucide-react';
 import Sidebar from './Sidebar';
 import { useLanguage } from '../../context/LanguageContext';
 
@@ -28,6 +28,7 @@ const DashboardLayout = ({ navItems, basePath, brandTitle, brandSubtitle }) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isLanguageMenuOpen, setIsLanguageMenuOpen] = useState(false);
   const languageMenuRef = useRef(null);
+  const isDarkTheme = theme === 'dark';
 
   const toggleSidebar = () => setIsSidebarOpen((prev) => !prev);
   const closeSidebar = () => setIsSidebarOpen(false);
@@ -73,8 +74,6 @@ const DashboardLayout = ({ navItems, basePath, brandTitle, brandSubtitle }) => {
   return (
     <div className="app-container">
       <Sidebar
-        theme={theme}
-        onToggleTheme={handleThemeToggle}
         isCollapsed={isSidebarCollapsed}
         onToggleCollapse={toggleSidebarCollapse}
         isOpen={isSidebarOpen}
@@ -105,33 +104,46 @@ const DashboardLayout = ({ navItems, basePath, brandTitle, brandSubtitle }) => {
             <Menu size={24} />
           </button>
 
-          <div className="language-menu" ref={languageMenuRef}>
+          <div className="topbar-actions">
             <button
               type="button"
-              className="language-icon-button glass-panel"
-              aria-label={t('topbar.languageMenuLabel')}
-              aria-expanded={isLanguageMenuOpen}
-              onClick={() => setIsLanguageMenuOpen((open) => !open)}
+              className="topbar-icon-button glass-panel"
+              onClick={handleThemeToggle}
+              aria-label={t('common.appearance.label')}
+              title={t('common.appearance.label')}
             >
-              <Languages size={18} />
-              <span className="language-current">{language.toUpperCase()}</span>
+              {isDarkTheme ? <Moon size={18} /> : <Sun size={18} />}
+              <span>{isDarkTheme ? t('common.appearance.dark') : t('common.appearance.bright')}</span>
             </button>
 
-            {isLanguageMenuOpen && (
-              <div className="language-dropdown glass-panel" role="menu">
-                {LANGUAGE_OPTIONS.map((option) => (
-                  <button
-                    key={option.code}
-                    type="button"
-                    className={`language-menu-item ${language === option.code ? 'active' : ''}`}
-                    onClick={() => handleLanguageSelect(option.code)}
-                  >
-                    <span>{t(option.labelKey)}</span>
-                    {language === option.code && <Check size={16} />}
-                  </button>
-                ))}
-              </div>
-            )}
+            <div className="language-menu" ref={languageMenuRef}>
+              <button
+                type="button"
+                className="topbar-icon-button language-icon-button glass-panel"
+                aria-label={t('topbar.languageMenuLabel')}
+                aria-expanded={isLanguageMenuOpen}
+                onClick={() => setIsLanguageMenuOpen((open) => !open)}
+              >
+                <Languages size={18} />
+                <span className="language-current">{language.toUpperCase()}</span>
+              </button>
+
+              {isLanguageMenuOpen && (
+                <div className="language-dropdown glass-panel" role="menu">
+                  {LANGUAGE_OPTIONS.map((option) => (
+                    <button
+                      key={option.code}
+                      type="button"
+                      className={`language-menu-item ${language === option.code ? 'active' : ''}`}
+                      onClick={() => handleLanguageSelect(option.code)}
+                    >
+                      <span>{t(option.labelKey)}</span>
+                      {language === option.code && <Check size={16} />}
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
           </div>
         </div>
         <Outlet />

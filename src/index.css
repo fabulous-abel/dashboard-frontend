@@ -195,13 +195,20 @@ a {
   margin-bottom: 1.5rem;
 }
 
+.topbar-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  margin-left: auto;
+}
+
 .language-menu {
   position: relative;
-  margin-left: auto;
   z-index: 110;
 }
 
-.language-icon-button {
+.topbar-icon-button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -217,7 +224,7 @@ a {
   transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
 }
 
-.language-icon-button:hover {
+.topbar-icon-button:hover {
   background: var(--hover-surface);
   border-color: var(--glass-glow);
 }
@@ -325,12 +332,16 @@ a {
     box-shadow: 0 4px 12px var(--glass-glow);
   }
 
+  .topbar-actions {
+    gap: 0.6rem;
+  }
+
   .language-menu {
     width: auto;
     z-index: 85;
   }
 
-  .language-icon-button {
+  .topbar-icon-button {
     width: auto;
     justify-content: center;
   }

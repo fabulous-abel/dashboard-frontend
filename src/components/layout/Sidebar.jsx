@@ -1,14 +1,10 @@
 import { createElement } from 'react';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import {
-  Sun,
-  Moon,
   LogOut,
   PanelLeftClose,
   PanelLeftOpen,
   X,
-  ArrowLeftRight,
-  Languages,
 } from 'lucide-react';
 import brandLogo from '../../assets/logo.png';
 import { useLanguage } from '../../context/LanguageContext';
@@ -37,8 +33,6 @@ const NavigationItem = ({ to, icon, label, onClick, isCollapsed, end }) => (
 );
 
 const Sidebar = ({
-  theme,
-  onToggleTheme,
   isCollapsed,
   onToggleCollapse,
   isOpen,
@@ -48,27 +42,28 @@ const Sidebar = ({
   brandTitle,
   brandSubtitle,
 }) => {
-  const { t, language, toggleLanguage } = useLanguage();
-  const { logout, roleMeta } = useAuth();
-  const navigate = useNavigate();
-  const isDarkTheme = theme === 'dark';
+  const { t } = useLanguage();
+  const { roleMeta } = useAuth();
   const collapseLabel = isCollapsed ? 'Expand sidebar' : 'Collapse sidebar';
-  const nextLanguageLabel =
-    language === 'en' ? t('common.languages.amharic') : t('common.languages.english');
 
   const displayTitle = brandTitle?.startsWith('sidebar.') ? t(brandTitle) : (brandTitle || t('sidebar.brandTitle'));
   const displaySubtitle = brandSubtitle?.startsWith('sidebar.') ? t(brandSubtitle) : (brandSubtitle || t('sidebar.brandSubtitle'));
   const avatarLetter = roleMeta?.avatarLetter || 'A';
 
-  const handleSwitchDashboard = () => {
-    logout();
-    navigate('/');
-  };
-
   return (
     <aside className={`sidebar glass-panel ${isOpen ? 'open' : ''} ${isCollapsed ? 'collapsed' : ''}`}>
       <div className="sidebar-header">
         <div className="sidebar-header-actions">
+          <button
+            type="button"
+            className="desktop-toggle-button collapse-toggle-button"
+            onClick={onToggleCollapse}
+            aria-label={collapseLabel}
+            title={collapseLabel}
+          >
+            {isCollapsed ? <PanelLeftOpen size={18} /> : <PanelLeftClose size={18} />}
+          </button>
+
           <button
             type="button"
             className="mobile-close-button"
@@ -116,48 +111,6 @@ const Sidebar = ({
         <div className="footer-actions">
           <button
             type="button"
-            className="theme-switch"
-            onClick={onToggleTheme}
-            aria-label={t('common.appearance.label')}
-            title={isCollapsed ? t('common.appearance.label') : undefined}
-          >
-            <div className="theme-switch-copy">
-              <span className="theme-switch-label">{t('common.appearance.label')}</span>
-              <span className="theme-switch-value">
-                {isDarkTheme ? t('common.appearance.dark') : t('common.appearance.bright')}
-              </span>
-            </div>
-            <div className={`theme-switch-track ${isDarkTheme ? 'is-dark' : ''}`}>
-              <span className="theme-switch-icon">
-                {isDarkTheme ? <Moon size={14} /> : <Sun size={14} />}
-              </span>
-            </div>
-          </button>
-
-          <button
-            type="button"
-            className="language-switch"
-            onClick={toggleLanguage}
-            aria-label={nextLanguageLabel}
-            title={isCollapsed ? nextLanguageLabel : undefined}
-          >
-            <Languages size={18} />
-            <span className="sidebar-action-text">{nextLanguageLabel}</span>
-          </button>
-
-          <button
-            type="button"
-            className="switch-dashboard-button"
-            onClick={handleSwitchDashboard}
-            aria-label={t('sidebar.switchDashboard')}
-            title={isCollapsed ? t('sidebar.switchDashboard') : undefined}
-          >
-            <ArrowLeftRight size={18} />
-            <span className="sidebar-action-text">{t('sidebar.switchDashboard')}</span>
-          </button>
-
-          <button
-            type="button"
             className="sign-out-button"
             aria-label={t('sidebar.signOut')}
             title={isCollapsed ? t('sidebar.signOut') : undefined}
@@ -167,15 +120,6 @@ const Sidebar = ({
           </button>
         </div>
 
-        <button
-          type="button"
-          className="desktop-toggle-button collapse-toggle-button"
-          onClick={onToggleCollapse}
-          aria-label={collapseLabel}
-          title={collapseLabel}
-        >
-          {isCollapsed ? <PanelLeftOpen size={18} /> : <PanelLeftClose size={18} />}
-        </button>
       </div>
     </aside>
   );

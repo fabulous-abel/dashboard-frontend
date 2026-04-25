@@ -28,8 +28,7 @@
     "brandTitle": "Sunday School",
     "brandSubtitle": "Learning Portal",
     "adminUser": "Admin User",
-    "signOut": "Sign Out",
-    "switchDashboard": "Switch Dashboard"
+    "signOut": "Sign Out"
   },
   "topbar": {
     "languageMenuLabel": "Choose language"

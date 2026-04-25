@@ -1,9 +1,10 @@
-import React, { useEffect } from 'react';
-import { X } from 'lucide-react';
+import React, { useEffect, useState } from 'react';
+import { ChevronDown, X } from 'lucide-react';
 import { useLanguage } from '../../context/LanguageContext';
 
 const StudentDetailModal = ({ student, onClose }) => {
   const { t } = useLanguage();
+  const [historyPanel, setHistoryPanel] = useState({ studentId: null, isOpen: false });
 
   useEffect(() => {
     if (!student) {
@@ -34,6 +35,8 @@ const StudentDetailModal = ({ student, onClose }) => {
   const history = student.history || [];
   const firstHistory = history[0];
   const latestHistory = history[history.length - 1];
+  const historySectionId = `student-history-${student.id}`;
+  const isHistoryOpen = historyPanel.studentId === student.id && historyPanel.isOpen;
 
   const profileItems = [
     { label: t('students.modal.labels.studentId'), value: student.id },
@@ -98,12 +101,24 @@ const StudentDetailModal = ({ student, onClose }) => {
                 {t('common.grades.grade', { number: student.grade })}
               </div>
             </div>
-            <div className="student-overview-card">
+            <button
+              type="button"
+              className={`student-overview-card student-overview-button ${isHistoryOpen ? 'active' : ''}`}
+              aria-expanded={isHistoryOpen}
+              aria-controls={historySectionId}
+              onClick={() =>
+                setHistoryPanel((currentPanel) => ({
+                  studentId: student.id,
+                  isOpen: currentPanel.studentId === student.id ? !currentPanel.isOpen : true,
+                }))
+              }
+            >
               <span className="student-overview-label">{t('students.modal.overview.progressionSpan')}</span>
-              <div className="student-overview-value">
-                {firstHistory ? `${firstHistory.startYear} - ${latestHistory.endYear}` : '-'}
+              <div className="student-overview-value student-overview-action-value">
+                <span>{firstHistory ? `${firstHistory.startYear} - ${latestHistory.endYear}` : '-'}</span>
+                <ChevronDown size={18} className="student-overview-chevron" aria-hidden="true" />
               </div>
-            </div>
+            </button>
           </div>
 
           <section className="student-modal-section">
@@ -118,39 +133,41 @@ const StudentDetailModal = ({ student, onClose }) => {
             </div>
           </section>
 
-          <section className="student-modal-section">
-            <h3 className="student-section-title">{t('students.modal.sections.history')}</h3>
-            {history.length > 0 ? (
-              <div className="student-history-list">
-                {history.map((record, index) => (
-                  <article
-                    className={`student-history-card ${index === history.length - 1 ? 'current' : ''}`}
-                    key={`${student.id}-${record.grade}-${record.startYear}`}
-                  >
-                    <div className="student-history-grade">
-                      {t('common.grades.grade', { number: record.grade })}
-                    </div>
-                    <div className="student-history-period">
-                      <span className="student-history-label">{t('students.modal.history.academicYear')}</span>
-                      <div className="student-history-value">{record.startYear} - {record.endYear}</div>
-                    </div>
-                    <div className="student-history-content">
-                      <div>
-                        <span className="student-history-label">{t('students.modal.history.classTeacher')}</span>
-                        <div className="student-history-value">{record.teacher}</div>
+          {isHistoryOpen && (
+            <section className="student-modal-section" id={historySectionId}>
+              <h3 className="student-section-title">{t('students.modal.sections.history')}</h3>
+              {history.length > 0 ? (
+                <div className="student-history-list">
+                  {history.map((record, index) => (
+                    <article
+                      className={`student-history-card ${index === history.length - 1 ? 'current' : ''}`}
+                      key={`${student.id}-${record.grade}-${record.startYear}`}
+                    >
+                      <div className="student-history-grade">
+                        {t('common.grades.grade', { number: record.grade })}
                       </div>
-                      <div>
-                        <span className="student-history-label">{t('students.modal.history.result')}</span>
-                        <p className="student-history-result">{record.result}</p>
+                      <div className="student-history-period">
+                        <span className="student-history-label">{t('students.modal.history.academicYear')}</span>
+                        <div className="student-history-value">{record.startYear} - {record.endYear}</div>
                       </div>
-                    </div>
-                  </article>
-                ))}
-              </div>
-            ) : (
-              <div className="student-history-empty">{t('students.modal.history.empty')}</div>
-            )}
-          </section>
+                      <div className="student-history-content">
+                        <div>
+                          <span className="student-history-label">{t('students.modal.history.classTeacher')}</span>
+                          <div className="student-history-value">{record.teacher}</div>
+                        </div>
+                        <div>
+                          <span className="student-history-label">{t('students.modal.history.result')}</span>
+                          <p className="student-history-result">{record.result}</p>
+                        </div>
+                      </div>
+                    </article>
+                  ))}
+                </div>
+              ) : (
+                <div className="student-history-empty">{t('students.modal.history.empty')}</div>
+              )}
+            </section>
+          )}
         </div>
       </div>
     </div>

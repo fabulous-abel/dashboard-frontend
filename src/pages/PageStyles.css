@@ -401,6 +401,24 @@ tr:hover td {
   background: var(--surface-color);
 }
 
+.student-overview-button {
+  width: 100%;
+  text-align: left;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.student-overview-button:hover,
+.student-overview-button:focus-visible,
+.student-overview-button.active {
+  background: var(--hover-surface);
+  border-color: var(--accent-primary);
+  box-shadow: 0 0 0 2px var(--glass-glow);
+  outline: none;
+}
+
 .student-overview-label {
   display: block;
   color: var(--text-secondary);
@@ -415,6 +433,23 @@ tr:hover td {
   font-size: 1.05rem;
   font-weight: 700;
   color: var(--text-primary);
+}
+
+.student-overview-action-value {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.student-overview-chevron {
+  flex-shrink: 0;
+  color: var(--accent-primary);
+  transition: transform 0.2s ease;
+}
+
+.student-overview-button.active .student-overview-chevron {
+  transform: rotate(180deg);
 }
 
 .student-modal-section {
