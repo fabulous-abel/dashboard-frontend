@@ -52,6 +52,7 @@ export default defineConfig({
   build: {
     rollupOptions: {
       input: {
+        index: resolve(rootDir, 'index.html'),
         hr: resolve(rootDir, 'hr/index.html'),
         learning: resolve(rootDir, 'learning/index.html'),
         superadmin: resolve(rootDir, 'superadmin/index.html'),
