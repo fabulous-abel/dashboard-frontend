@@ -59,6 +59,37 @@
       "parentContact": "Parent Contact",
       "status": "Status",
       "actions": "Actions"
+    },
+    "modal": {
+      "title": "Student Profile",
+      "close": "Close student profile",
+      "sections": {
+        "profile": "Profile Overview",
+        "history": "Class Progression"
+      },
+      "overview": {
+        "entryGrade": "Entry Grade",
+        "currentGrade": "Current Grade",
+        "progressionSpan": "Progression Span"
+      },
+      "labels": {
+        "studentId": "Student ID",
+        "guardian": "Parent / Guardian",
+        "guardianPhone": "Parent Contact",
+        "emergencyContact": "Emergency Contact",
+        "dateOfBirth": "Date of Birth",
+        "gender": "Gender",
+        "address": "Address",
+        "enrollmentYear": "Enrollment Year",
+        "attendance": "Attendance Rate",
+        "notes": "Notes"
+      },
+      "history": {
+        "academicYear": "Academic Year",
+        "classTeacher": "Class Teacher",
+        "result": "Progress",
+        "empty": "No class history is available for this student."
+      }
     }
   },
   "teachers": {

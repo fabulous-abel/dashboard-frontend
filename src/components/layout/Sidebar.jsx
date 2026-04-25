@@ -1,3 +1,4 @@
+import { createElement } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import {
   Sun,
@@ -14,7 +15,14 @@ import { useLanguage } from '../../context/LanguageContext';
 import { useAuth } from '../../context/AuthContext';
 import './Sidebar.css';
 
-const NavigationItem = ({ to, icon: Icon, label, onClick, isCollapsed, end }) => (
+const buildNavPath = (basePath = '/', itemPath = '') => {
+  const normalizedBase = basePath === '/' ? '' : basePath.replace(/\/+$/, '');
+  const normalizedItem = itemPath.replace(/^\/+/, '');
+
+  return normalizedItem ? `${normalizedBase}/${normalizedItem}` : normalizedBase || '/';
+};
+
+const NavigationItem = ({ to, icon, label, onClick, isCollapsed, end }) => (
   <NavLink
     to={to}
     end={end}
@@ -23,7 +31,7 @@ const NavigationItem = ({ to, icon: Icon, label, onClick, isCollapsed, end }) =>
     aria-label={label}
     title={isCollapsed ? label : undefined}
   >
-    <Icon size={20} className="nav-icon" />
+    {createElement(icon, { size: 20, className: 'nav-icon' })}
     <span className="nav-label">{label}</span>
   </NavLink>
 );
@@ -86,7 +94,7 @@ const Sidebar = ({
         {navItems.map((item) => (
           <NavigationItem
             key={item.path}
-            to={`${basePath}/${item.path}`}
+            to={buildNavPath(basePath, item.path)}
             icon={item.icon}
             label={t(item.labelKey)}
             onClick={onClose}

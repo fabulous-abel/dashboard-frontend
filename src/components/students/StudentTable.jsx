@@ -2,7 +2,7 @@ import React from 'react';
 import { Eye, Edit2, Trash2 } from 'lucide-react';
 import { useLanguage } from '../../context/LanguageContext';
 
-const StudentTable = ({ students }) => {
+const StudentTable = ({ students, onViewStudent }) => {
   const { t } = useLanguage();
 
   return (
@@ -33,13 +33,18 @@ const StudentTable = ({ students }) => {
                 </span>
               </td>
               <td className="actions-cell">
-                <button className="btn-icon" title={t('common.actions.viewDetails')}>
+                <button
+                  type="button"
+                  className="btn-icon"
+                  title={t('common.actions.viewDetails')}
+                  onClick={() => onViewStudent?.(student)}
+                >
                   <Eye size={16} />
                 </button>
-                <button className="btn-icon" title={t('common.actions.edit')}>
+                <button type="button" className="btn-icon" title={t('common.actions.edit')}>
                   <Edit2 size={16} />
                 </button>
-                <button className="btn-icon" title={t('common.actions.delete')}>
+                <button type="button" className="btn-icon" title={t('common.actions.delete')}>
                   <Trash2 size={16} />
                 </button>
               </td>

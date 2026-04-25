@@ -1,5 +1,10 @@
 {
   "rewrites": [
-    { "source": "/(.*)", "destination": "/index.html" }
+    { "source": "/learning", "destination": "/learning/index.html" },
+    { "source": "/learning/:path*", "destination": "/learning/index.html" },
+    { "source": "/hr", "destination": "/hr/index.html" },
+    { "source": "/hr/:path*", "destination": "/hr/index.html" },
+    { "source": "/superadmin", "destination": "/superadmin/index.html" },
+    { "source": "/superadmin/:path*", "destination": "/superadmin/index.html" }
   ]
 }
